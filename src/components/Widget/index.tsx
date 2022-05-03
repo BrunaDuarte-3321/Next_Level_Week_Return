@@ -2,6 +2,7 @@ import React/* , { useState } */ from "react";
 
 import {ChatTeardropDots} from 'phosphor-react';
 import {Popover} from '@headlessui/react' // biblioteca de acessibilidade
+import { WidgetForm } from "../WidgetForm";
 
 export const Widget = () =>{
 
@@ -11,11 +12,13 @@ export const Widget = () =>{
         setIsWidgetOpen(!isWidgetOpen)
     } */
     return(
-        <Popover className="absolute bottom-4 right-5">
-            <Popover.Panel>Hello World</Popover.Panel>
+        <Popover className="absolute bottom-4 md:bottom-8 md:right-8 right-4 flex flex-col items-end">
+            <Popover.Panel>
+              <WidgetForm/>
+            </Popover.Panel>
           {/*   {isWidgetOpen && <p>Hello World</p>} */}
-            <Popover.Button  className="bg-brend-500 rounded-full
-              px-3 h-12 text-white flex items-center group">
+            <Popover.Button  className="bg-brend-500 rounded-full px-3 h-12 
+              text-white flex items-center group">
 
                 <ChatTeardropDots className="w-6 h-6" />
 
