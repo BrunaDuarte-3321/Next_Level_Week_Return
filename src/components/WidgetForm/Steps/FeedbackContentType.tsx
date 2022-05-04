@@ -2,21 +2,23 @@ import { ArrowArcLeft, Camera } from "phosphor-react";
 import React, { useState } from "react";
 import { FeedbackType, feedbackTypes } from "..";
 import { CloseButton } from "../../CloseButton";
-import { ScreenshotButton } from "../ScreemshotButton";
+import { ScreenshotButton } from "../ScreenshotButton";
 
 interface FeedbackContentStepProps {
     feedbackType: FeedbackType;
     onFeedbackRestartRequested: () => void
-    screenshort:string
+    screenshort?:string
+    onFeedbackSent: () => void
 }
 export const FeedbackContentStep = ({
     feedbackType, 
     onFeedbackRestartRequested,
+    onFeedbackSent
 }:FeedbackContentStepProps) =>{
 
     const [comment,setComment] = useState('')
 
-    const [screenshort, setScreenshot] =useState<string | null>(null)
+    const [screenshort, setScreenshot] = useState<string | null>(null)
 
     const handleSubmitFeedback = (event: React.FormEvent) =>{
         event.preventDefault();
@@ -24,6 +26,8 @@ export const FeedbackContentStep = ({
             screenshort,
             comment
         })
+        setComment('')
+        onFeedbackSent();
     }
     const feedbackTypeInfo = feedbackTypes[feedbackType];
     return(
@@ -44,7 +48,11 @@ export const FeedbackContentStep = ({
             </header>  
             <form onSubmit={handleSubmitFeedback} className="my-4 w-full">
                 <textarea
-                onChange={({target}) =>  setComment(target.value)}
+                value={comment}
+                onChange={({target}) =>  {
+                    setComment(target.value)
+                    
+                }}
                 className="min-w-[304px] w-full min-h-[112px] text-sm placeholder-zinc-400 
                 text-zinc-100 border-zinc-600 bg-transparent rounded-md focus:border-brend-500
                  focus:ring-brend-500 focus:ring-1 focus:outline-none resize-none 
@@ -54,8 +62,9 @@ export const FeedbackContentStep = ({
                 /> 
                 <footer className="flex gap-2 mt-2">
                     <ScreenshotButton 
-                    onScreenshortTook={setScreenshot}
                     screenshort={screenshort}
+                    onScreenshortTook={setScreenshot}
+                    
                     
                     />
                     <button

@@ -16,9 +16,9 @@ export const ScreenshotButton = ({
     const handleTakeScreenshot = async () => {
         setIsTakeScrennshot(true)
         const canvas = await html2canvas(document.querySelector('html')!);
-        const base64image = canvas.toDataURL('image/png')
+        const base64Image = canvas.toDataURL('image/png')
 
-        onScreenshortTook(base64image)
+        onScreenshortTook(base64Image)
         setIsTakeScrennshot(false)  
     }
 
@@ -29,13 +29,14 @@ export const ScreenshotButton = ({
             type="button" 
             className="p-1 w-10 h-10 rounded-md 
             border-transparent flex justify-end items-end 
-            text-zinc-400 hover:text-zinc-100 transition-colors">
-                <Trash weight="fill" className="" 
-                style={{
+            text-zinc-400 hover:text-zinc-100 transition-colors"
+            style={{
                    backgroundImage: `url(${screenshort})`,
                    backgroundPosition:'right bottom',
                    backgroundSize:200
-                }}/>
+                }}>
+                <Trash weight="fill" 
+                />
             </button>
         )
     }
